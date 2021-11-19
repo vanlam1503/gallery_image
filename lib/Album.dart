@@ -12,17 +12,15 @@ class Album {
   factory Album.fromJson(Map<String, dynamic> json) {
     return Album(json["userId"], json["id"], json['title']);
   }
-
 }
 
-Future<Album> fetchAlbum() async {
+var photoslibrary = "https://www.googleapis.com/auth/photoslibrary";
+var albums = "https://photoslibrary.googleapis.com/v1/mediaItems";
+var photoslibrarySharing = "https://www.googleapis.com/auth/photoslibrary.sharing";
+Future<http.Response> fetchAlbum(Future<Map<String, String>> authHeaders) async {
   final response = await http
-      .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
+      .get(Uri.parse(albums), headers: await authHeaders);
   print('vanlam');
-  print(response);
-  if (response.statusCode == 200) {
-    return Album.fromJson(jsonDecode(response.body));
-  } else {
-    throw Exception('Failed to load album');
-  }
+  print(response.body);
+  return response;
 }
