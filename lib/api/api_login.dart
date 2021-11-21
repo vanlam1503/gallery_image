@@ -16,6 +16,7 @@ class APILogin {
   GoogleSignIn googleSignIn = GoogleSignIn(
       scopes: [
         'email',
+        'https://www.googleapis.com/auth/contacts.readonly',
         'https://www.googleapis.com/auth/photoslibrary',
         'https://www.googleapis.com/auth/photoslibrary.appendonly',
         'https://www.googleapis.com/auth/photoslibrary.sharing'

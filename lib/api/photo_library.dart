@@ -29,7 +29,8 @@ class PhotoLibrary {
       List<Album> albums = values.map((e) => Album.fromJson(e)).toList();
       return Result.success(albums);
     } else {
-      return Result.failure(1, 'Can not fetch album');
+      var failure = (result as FailureState);
+      return Result.failure(failure.code, failure.msg);
     }
   }
 
@@ -40,7 +41,8 @@ class PhotoLibrary {
       List<MediaItem> mediaItems = values.map((e) => MediaItem.fromJson(e)).toList();
       return Result.success(mediaItems);
     } else {
-      return Result.failure(1, 'Can not fetch album');
+      var failure = (result as FailureState);
+      return Result.failure(failure.code, failure.msg);
     }
   }
 
@@ -51,11 +53,8 @@ class PhotoLibrary {
       List<Album> albums = values.map((e) => Album.fromJson(e)).toList();
       return Result.success(albums);
     } else {
-      return Result.failure(1, 'Can not fetch sharedAlbum');
+      var failure = (result as FailureState);
+      return Result.failure(failure.code, failure.msg);
     }
-  }
-
-  static String fullPhotoPath(String photoURL) {
-    return '$photoURL?key=$apiKey';
   }
 }

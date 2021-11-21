@@ -29,6 +29,7 @@ class Login extends StatefulWidget {
 class _Login extends State<Login> {
 
   final String placeHolder = 'images/ic_avatar.png';
+
   APILogin apiLogin = APILogin();
   LoginType login = LoginType.login;
   User? user;
