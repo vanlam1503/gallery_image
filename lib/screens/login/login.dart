@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gallery_image/api/api_login.dart';
+import 'package:gallery_image/model/user.dart';
+import 'package:gallery_image/model/unwrap.dart';
 import 'package:gallery_image/screens/home/home.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -26,16 +29,9 @@ class Login extends StatefulWidget {
 class _Login extends State<Login> {
 
   final String placeHolder = 'images/ic_avatar.png';
-  GoogleSignIn googleSignIn = GoogleSignIn(
-    scopes: [
-      'email',
-      'https://www.googleapis.com/auth/contacts.readonly',
-    ],
-    clientId: '830247991511-u58o8inh9kj46e15kje40c457et0qhil.apps.googleusercontent.com'
-  );
-  String? photoURL;
-  String username = 'Van lam';
+  APILogin apiLogin = APILogin();
   LoginType login = LoginType.login;
+  User? user;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,25 +44,23 @@ class _Login extends State<Login> {
               height: 100,
               child: Center(child: ClipRRect(
                 borderRadius: BorderRadius.circular(50),
-                child: _avatarImage(photoURL),
+                child: _avatarImage(user?.avatar),
               )))),
           Padding(padding: const EdgeInsets.fromLTRB(0, 10, 0, 20),
             child: Center(
-              child: Text(username, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 40),),
+              child: Text(Unwrap(user?.username).or('username'), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 40),),
             )
           ),
           Container(
             width: 140,
             height: 46,
-            child: Container(
-              decoration: const BoxDecoration(
+            decoration: const BoxDecoration(
                 color: const Color.fromRGBO(104, 86, 105, 1),
                 borderRadius: const BorderRadius.all(Radius.circular(23))
               ),
-              child: TextButton(child: const Text('Login',
+              child: TextButton(child: Text(login.title,
                   style: const TextStyle(color: Colors.white, fontSize: 18
               )), onPressed: onTap),
-            ),
           )
         ],
       ),
@@ -82,24 +76,20 @@ class _Login extends State<Login> {
   }
 
   void signIn() {
-    googleSignIn.signIn();
-    googleSignIn.onCurrentUserChanged.listen((event) {
+    apiLogin.signIn((user) {
       setState(() {
-        photoURL = event?.photoUrl;
-        var displayName = event?.displayName;
-        if (displayName != null) {
-          username = displayName;
+        if (user != null) {
           login = LoginType.albums;
         } else {
-          username = "username";
           login = LoginType.login;
         }
+        this.user = user;
       });
     });
   }
 
   void onPush() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Home(user?.authHeaders)));
   }
 
   Widget _avatarImage(String? photoUrl) {
