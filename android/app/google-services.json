@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "830247991511",
+    "project_id": "galleryimage",
+    "storage_bucket": "galleryimage.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830247991511:android:00d0d5770d18fca4ebd892",
+        "android_client_info": {
+          "package_name": "com.lamle.galleryimage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "830247991511-ftmo2t6galjj5a3e8f132g1v8gkcr6nb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lamle.galleryimage",
+            "certificate_hash": "f94add7e4e10a8140946b18a2c848c910542dca8"
+          }
+        },
+        {
+          "client_id": "830247991511-ebq17ug8f3dveksha1ke5o8975moir8a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPczqIgrm73M-n6O6zd7xqVDgwHSu5GMk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "830247991511-ebq17ug8f3dveksha1ke5o8975moir8a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "830247991511-u58o8inh9kj46e15kje40c457et0qhil.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lamle.galleryimage"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
